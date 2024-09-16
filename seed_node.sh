@@ -6,22 +6,22 @@ MONIKER="second"
 MAINNODE_RPC="https://rpc2.catenarpc.com"
 MAINNODE_ID="fd930ec05a4120c9f80086351354127545f659f7@8.209.96.231:26656"
 KEYRING="os"
-CONFIG="$HOME/.catenad/config/config.toml"
-APPCONFIG="$HOME/.catenad/config/app.toml"
+CONFIG="$HOME/.lefeefd/config/config.toml"
+APPCONFIG="$HOME/.lefeefd/config/app.toml"
 
 # install chain binary file
 make install
 
 # Set moniker and chain-id for chain (Moniker can be anything, chain-id must be same mainnode)
-catenad init $MONIKER --chain-id=$CHAINID
+lefeefd init $MONIKER --chain-id=$CHAINID
 
 # Fetch genesis.json from genesis node
-curl $MAINNODE_RPC/genesis? | jq ".result.genesis" > ~/.catenad/config/genesis.json
+curl $MAINNODE_RPC/genesis? | jq ".result.genesis" > ~/.lefeefd/config/genesis.json
 
-catenad validate-genesis
+lefeefd validate-genesis
 
 # set seed to main node's id manually
-# sed -i 's/seeds = ""/seeds = "'$MAINNODE_ID'"/g' ~/.catenad/config/config.toml
+# sed -i 's/seeds = ""/seeds = "'$MAINNODE_ID'"/g' ~/.lefeefd/config/config.toml
 
 # add for rpc
 sed -i 's/timeout_commit = "5s"/timeout_commit = "2s"/g' "$CONFIG"
@@ -33,7 +33,7 @@ sed -i 's/enabled-unsafe-cors = false/enabled-unsafe-cors = true/g'  "$APPCONFIG
 sed -i 's/api = "eth,net,web3"/api = "eth,txpool,personal,net,debug,web3"/g' "$APPCONFIG"
 
 # add account for validator in the node
-catenad keys add $VALIDATOR --keyring-backend $KEYRING
+lefeefd keys add $VALIDATOR --keyring-backend $KEYRING
 
 # run node
-#catenad start --rpc.laddr tcp://0.0.0.0:26657 --pruning=nothing
+#lefeefd start --rpc.laddr tcp://0.0.0.0:26657 --pruning=nothing
