@@ -35,7 +35,7 @@ const (
 	// TestnetChainID defines the Evmos EIP155 chain ID for testnet
 	TestnetChainID = "lefeef_2009-2"
 	// BaseDenom defines the Evmos mainnet denomination
-	BaseDenom = "exa"
+	BaseDenom = "atlef"
 )
 
 // IsMainnet returns true if the chain-id has the Evmos mainnet EIP155 chain prefix.

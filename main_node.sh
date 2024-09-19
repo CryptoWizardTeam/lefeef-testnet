@@ -60,11 +60,11 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	lefeefd init $MONIKER -o --chain-id $CHAINID --home "$HOMEDIR"
 
 	# Change parameter token denominations to lefeef
-	jq '.app_state["staking"]["params"]["bond_denom"]="exa"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-	jq '.app_state["crisis"]["constant_fee"]["denom"]="exa"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-	jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="exa"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-	jq '.app_state["evm"]["params"]["evm_denom"]="exa"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-	jq '.app_state["inflation"]["params"]["mint_denom"]="exa"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["staking"]["params"]["bond_denom"]="atlef"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["crisis"]["constant_fee"]["denom"]="atlef"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="atlef"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["evm"]["params"]["evm_denom"]="atlef"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	jq '.app_state["inflation"]["params"]["mint_denom"]="atlef"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 	jq '.app_state["inflation"]["params"]["exponential_calculation"]["a"]="1000000000.000000000000000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 	jq '.app_state["inflation"]["params"]["exponential_calculation"]["c"]="31250000.000000000000000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 	jq '.app_state["inflation"]["params"]["exponential_calculation"]["bonding_target"]="0.650000000000000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
@@ -162,7 +162,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 
 	# Allocate genesis accounts (cosmos formatted addresses)
 	
-	lefeefd add-genesis-account ${KEYS[0]} 16000000000000000000000000000exa --keyring-backend $KEYRING --home "$HOMEDIR"
+	lefeefd add-genesis-account ${KEYS[0]} 16000000000000000000000000000atlef --keyring-backend $KEYRING --home "$HOMEDIR"
 	
 
 	# bc is required to add these big numbers
@@ -171,7 +171,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 
 
 	# Sign genesis transaction
-	lefeefd gentx ${KEYS[0]} 6400000000000000000000000exa --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR"  --fees 200000000000000000exa --min-self-delegation 6400000
+	lefeefd gentx ${KEYS[0]} 6400000000000000000000000atlef --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR"  --fees 200000000000000000atlef --min-self-delegation 6400000
 
 
 
@@ -188,4 +188,4 @@ fi
 
 # lefeefd start --pruning=nothing "$TRACE" --gas-prices auto --gas-adjustment 1.3 --fees auto --rpc.laddr tcp://0.0.0.0:26657 --log_level $LOGLEVEL --json-rpc.api eth,txpool,personal,net,debug,web3 --api.enable --home "$HOMEDIR"
 
-# lefeefd tx staking create-validator --amount=1000000000000000000000exa --from=validator2 --pubkey=$(lefeefd tendermint show-validator) --moniker="validator2" --chain-id lefeef_2009-1 --commission-rate="0.1" --commission-max-rate="0.2" --commission-max-change-rate="0.05" --min-self-delegation="500000000" --keyring-backend=test --yes --broadcast-mode block
+# lefeefd tx staking create-validator --amount=1000000000000000000000atlef --from=validator2 --pubkey=$(lefeefd tendermint show-validator) --moniker="validator2" --chain-id lefeef_2009-1 --commission-rate="0.1" --commission-max-rate="0.2" --commission-max-change-rate="0.05" --min-self-delegation="500000000" --keyring-backend=test --yes --broadcast-mode block
