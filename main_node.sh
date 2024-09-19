@@ -2,7 +2,7 @@
 
 KEYS[0]="CatenaFoundation"
 
-CHAINID="lefeef_2121-1"
+CHAINID="lefeef_2009-1"
 MONIKER="lefeefteam"
 # Remember to change to other types of keyring like 'file' in-case exposing to outside world,
 # otherwise your balance will be wiped quickly
@@ -188,4 +188,4 @@ fi
 
 # lefeefd start --pruning=nothing "$TRACE" --gas-prices auto --gas-adjustment 1.3 --fees auto --rpc.laddr tcp://0.0.0.0:26657 --log_level $LOGLEVEL --json-rpc.api eth,txpool,personal,net,debug,web3 --api.enable --home "$HOMEDIR"
 
-# lefeefd tx staking create-validator --amount=1000000000000000000000exa --from=validator2 --pubkey=$(lefeefd tendermint show-validator) --moniker="validator2" --chain-id lefeef_2121-1 --commission-rate="0.1" --commission-max-rate="0.2" --commission-max-change-rate="0.05" --min-self-delegation="500000000" --keyring-backend=test --yes --broadcast-mode block
+# lefeefd tx staking create-validator --amount=1000000000000000000000exa --from=validator2 --pubkey=$(lefeefd tendermint show-validator) --moniker="validator2" --chain-id lefeef_2009-1 --commission-rate="0.1" --commission-max-rate="0.2" --commission-max-change-rate="0.05" --min-self-delegation="500000000" --keyring-backend=test --yes --broadcast-mode block
