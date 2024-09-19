@@ -1,4 +1,4 @@
 all:
-	docker build --no-cache --tag catena/node ../.. -f catena/Dockerfile
+	docker build --no-cache --tag lefeef/node ../.. -f lefeef/Dockerfile
 
 .PHONY: all

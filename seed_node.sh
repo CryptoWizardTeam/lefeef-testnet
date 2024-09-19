@@ -3,7 +3,7 @@
 VALIDATOR="validator2"
 CHAINID="cmcx_2121-1"
 MONIKER="second"
-MAINNODE_RPC="https://rpc2.catenarpc.com"
+MAINNODE_RPC="https://rpc2.lefeefrpc.com"
 MAINNODE_ID="fd930ec05a4120c9f80086351354127545f659f7@8.209.96.231:26656"
 KEYRING="os"
 CONFIG="$HOME/.lefeefd/config/config.toml"

@@ -7,12 +7,12 @@ COMMIT := $(shell git log -1 --format='%H')
 LEDGER_ENABLED ?= true
 BINDIR ?= $(GOPATH)/bin
 EVMOS_BINARY = lefeefd
-EVMOS_DIR = catena
+EVMOS_DIR = lefeef
 BUILDDIR ?= $(CURDIR)/build
 HTTPS_GIT := https://github.com/evmos/evmos.git
 DOCKER := $(shell which docker)
 NAMESPACE := tharsishq
-PROJECT := catena
+PROJECT := lefeef
 DOCKER_IMAGE := $(NAMESPACE)/$(PROJECT)
 COMMIT_HASH := $(shell git rev-parse --short=7 HEAD)
 DOCKER_TAG := $(COMMIT_HASH)
@@ -61,7 +61,7 @@ build_tags := $(strip $(build_tags))
 
 # process linker flags
 
-ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=catena \
+ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=lefeef \
           -X github.com/cosmos/cosmos-sdk/version.AppName=$(EVMOS_BINARY) \
           -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
           -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
@@ -148,12 +148,12 @@ build-docker:
 	$(DOCKER) tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest
 	# docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:${COMMIT_HASH}
 	# update old container
-	$(DOCKER) rm catena || true
+	$(DOCKER) rm lefeef || true
 	# create a new container from the latest image
-	$(DOCKER) create --name catena -t -i ${DOCKER_IMAGE}:latest catena
+	$(DOCKER) create --name lefeef -t -i ${DOCKER_IMAGE}:latest lefeef
 	# move the binaries to the ./build directory
 	mkdir -p ./build/
-	$(DOCKER) cp catena:/usr/bin/lefeefd ./build/
+	$(DOCKER) cp lefeef:/usr/bin/lefeefd ./build/
 
 push-docker: build-docker
 	$(DOCKER) push ${DOCKER_IMAGE}:${DOCKER_TAG}
@@ -488,7 +488,7 @@ localnet-build:
 
 # Start a 4-node testnet locally
 localnet-start: localnet-stop localnet-build
-	@if ! [ -f build/node0/$(EVMOS_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/catena:Z catena/node "./lefeefd testnet init-files --v 4 -o /catena --keyring-backend=test --starting-ip-address 192.167.10.2"; fi
+	@if ! [ -f build/node0/$(EVMOS_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/lefeef:Z lefeef/node "./lefeefd testnet init-files --v 4 -o /lefeef --keyring-backend=test --starting-ip-address 192.167.10.2"; fi
 	docker-compose up -d
 
 # Stop testnet
